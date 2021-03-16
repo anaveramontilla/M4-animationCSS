@@ -1,0 +1,21 @@
+#cuadrado {
+    border: 2px solid black;
+    width: 800px;
+    height: 800px;
+    position: relative;
+}
+
+#cuadrado img {
+    position: absolute;
+    top: 40px;
+    animation: ejeY 1s linear 0s infinite alternate, ejeX 2.9s linear 0s infinite alternate;
+}
+
+@keyframes ejeY {
+    from {top: 40px} to {top: 670px;}
+}
+
+
+@keyframes ejeX {
+    from {left: 0px} to {left: 670px;}
+}
