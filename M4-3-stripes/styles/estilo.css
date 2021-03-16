@@ -1,0 +1,116 @@
+body {
+    margin-left: 0px; /*quitamos márgenes laterales*/
+    margin-right: 0px;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.7em;
+    color: #ffffff;
+}
+
+h1 {
+    font-weight: 300;
+}
+
+/* flex container que contiene los bloques*/
+.container {
+    display: flex; /*default flex-flow row nowrap*/
+    height: 100vh;
+}
+
+/*clase bloque, atributos comunes*/
+.bloque {
+    display: flex;
+    overflow: hidden; /*las partes de los elementos que sobresalgan no se verán*/
+    width: 20%;
+    margin-right: 3px;
+    position: relative; /*para después añadir el elemento semitransparente (que será absolute) con respecto al bloque*/
+    cursor: pointer; /*al ponernos encima de los bloques aparece puntero mano*/
+}
+
+
+/*plano blanco semitransparente*/
+.bloque::before {
+    content: ""; /*vacío porque no queremos añadir contenido*/
+    background-color: #ffffff;
+    opacity: 0.1;
+    position: absolute;
+    height: 100%; /*queremos que ocupe todo el bloque en alto y ancho*/
+    width: 100%;
+    top: 0px; /*top y left a 0 para que empiece desde arriba y a la izquierda*/
+    left: 0px;   
+    transform: skew(30deg); /*aplicamos la transformación de sesgar*/ 
+    transition-duration: 0.5s; /*para que cuando quitemos el puntero vuelva a su posición suavemente*/
+}
+
+/* cambio del plano blanco cuando nos ponemos encima */
+.bloque:hover::before {
+    transition-duration: 0.5s;
+    transform: scale(2, 2);
+}
+
+
+/* hijos de cada bloque*/
+.bloque:nth-child(1) {
+    background-color: #244F75;
+    justify-content: center;
+    align-items: center;
+    animation-name: izq__dcha;
+    animation-duration: 1s; /*en los siguientes bloques iremos aumentando esta duración para que vayan saliendo de manera irregular */
+    animation-timing-function: ease;
+}
+
+.bloque:nth-child(2) {
+    background-color: #60BFBF;
+    justify-content: center;
+    align-items: center;
+    animation-name: abajo__arriba;
+    animation-duration: 1.2s;
+    animation-timing-function: ease;
+}
+
+.bloque:nth-child(3) {
+    background-color: #8C4B7E;
+    justify-content: center;
+    align-items: center;
+    animation-name: arriba__abajo;
+    animation-duration: 1.4s;
+    animation-timing-function: ease;
+}
+
+.bloque:nth-child(4) {
+    background-color: #F8BB44;
+    justify-content: center;
+    align-items: center;
+    animation-name: abajo__arriba;
+    animation-duration: 1.6s;
+    animation-timing-function: ease;
+}
+
+.bloque:nth-child(5) {
+    background-color: #F24B4B;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0px; /*para que no tenga margen derecho*/
+    animation-name: dcha__izq;
+    animation-duration: 1.8s;
+    animation-timing-function: ease;
+}
+
+/*animación del primer bloque que va de izquierda a derecha*/
+@keyframes izq__dcha {
+    from {left:-400px;} to {left: 0px;}
+}
+
+/*animación de los bloques 2 y 4 que van de abajo a arriba*/
+@keyframes abajo__arriba {
+    from {top: 1000px;} to {top: 0px;}
+}
+
+/*animación del bloque central que va de arriba a abajo*/
+@keyframes arriba__abajo {
+    from {bottom: 1000px;} to {bottom: 0px;}
+}
+
+/*animación del último bloque que va de derecha a izquierda*/
+@keyframes dcha__izq {
+    from {right: -400px;} to {right: 0px;}
+}
